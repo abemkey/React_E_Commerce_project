@@ -20,7 +20,7 @@ function Header() {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <Navbar.Brand as={NavLink} to="/">
-            ProShop
+            E-SHOP
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
