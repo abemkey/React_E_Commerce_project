@@ -81,7 +81,11 @@ function ProductScreen() {
           <Row>
             <Col md={6}>
               <Image
-                src={product.image}
+                src={
+                  product.image && product.image.startsWith("http")
+                    ? product.image
+                    : `http://localhost:8000${product.image}`
+                }
                 alt={product.name}
                 fluid
                 className="d-block mx-auto"
@@ -130,7 +134,6 @@ function ProductScreen() {
                     </Row>
                   </ListGroup.Item>
 
-                  {/* ✅ Fixed: Separate ListGroup.Item for Qty */}
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
@@ -141,13 +144,13 @@ function ProductScreen() {
                             value={qty}
                             onChange={(e) => setQty(Number(e.target.value))}
                           >
-                            {[
-                              ...Array(Number(product.countInStock)).keys(),
-                            ].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </option>
-                            ))}
+                            {[...Array(Number(product.countInStock)).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
                           </Form.Control>
                         </Col>
                       </Row>
@@ -168,6 +171,7 @@ function ProductScreen() {
               </Card>
             </Col>
           </Row>
+
           <Row>
             <Col md={6}>
               <h4>Reviews</h4>
@@ -218,7 +222,7 @@ function ProductScreen() {
                         <Form.Label>Review</Form.Label>
                         <Form.Control
                           as="textarea"
-                          row="5"
+                          rows="5"
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>

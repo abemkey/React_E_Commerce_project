@@ -6,6 +6,8 @@ import Loader from "./Loader";
 import Message from "./Message";
 import { listTopProducts } from "../actions/productActions";
 
+const BACKEND_URL = "http://localhost:8000";
+
 function ProductCarousel() {
   const dispatch = useDispatch();
 
@@ -25,9 +27,12 @@ function ProductCarousel() {
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
-            <Carousel.Caption className="carousel-caption"
->
+            <Image
+              src={product.image ? `${BACKEND_URL}${product.image}` : '/images/placeholder.jpg'}
+              alt={product.name}
+              fluid
+            />
+            <Carousel.Caption className="carousel-caption">
               <h4>
                 {product.name} (${product.price})
               </h4>
@@ -40,3 +45,4 @@ function ProductCarousel() {
 }
 
 export default ProductCarousel;
+
